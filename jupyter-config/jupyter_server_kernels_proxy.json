@@ -1,0 +1,9 @@
+{
+    "ServerApp": {
+      "jpserver_extensions": {
+        "jupyter_server_kernels": false,
+        "jupyter_server_kernels_proxy": true
+      }
+    }
+  }
+  
