@@ -1,24 +1,8 @@
-"""Tornado handlers for the sessions web service.
-
-Preliminary documentation at https://github.com/ipython/ipython/wiki/IPEP-16%3A-Notebook-multi-directory-dashboard-and-URL-mapping#sessions-api
-"""
-# Copyright (c) Jupyter Development Team.
-# Distributed under the terms of the Modified BSD License.
-import asyncio
-import json
-
 import httpx
 
-try:
-    from jupyter_client.jsonutil import json_default
-except ImportError:
-    from jupyter_client.jsonutil import date_default as json_default
-
-from jupyter_client.kernelspec import NoSuchKernel
 from tornado import web
 
 from jupyter_server.auth import authorized
-from jupyter_server.utils import ensure_async, url_path_join
 
 from jupyter_server.base.handlers import APIHandler
 

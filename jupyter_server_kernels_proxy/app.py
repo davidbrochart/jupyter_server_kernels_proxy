@@ -1,9 +1,9 @@
 from jupyter_server.extension.application import ExtensionApp
-from jupyter_server_kernels.kernels.kernelmanager import MappingKernelManager
 from traitlets import Unicode
 
-from .kernels import handlers, websocket
-from .sessions import handlers
+from .kernels import handlers as kernels_handlers, websocket
+from .kernelspecs import handlers as kernelspecs_handlers
+from .sessions import handlers as sessions_handlers
 
 
 class KernelsProxyExtensionApp(ExtensionApp):
@@ -18,16 +18,13 @@ class KernelsProxyExtensionApp(ExtensionApp):
         self.settings.update(dict(
             kernels_available=True,
             proxy_url=self.proxy_url,
-            kernel_manager=KernelManager()
         ))
 
     def initialize_handlers(self):
         self.handlers.extend(websocket.default_handlers)
-        self.handlers.extend(handlers.default_handlers)
+        self.handlers.extend(kernels_handlers.default_handlers)
+        self.handlers.extend(kernelspecs_handlers.default_handlers)
+        self.handlers.extend(sessions_handlers.default_handlers)
         self.serverapp.web_app.settings["kernels_available"] = self.settings[
             "kernels_available"
         ]
-
-class KernelManager(MappingKernelManager):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
