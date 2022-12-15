@@ -18,6 +18,13 @@ pip install fps-noauth
 fps-uvicorn --host=0.0.0.0 --port=8000 --no-open-browser
 ```
 
+Alternatively (if you don't have a Unix shell on your target, like in an Android app) you can add this to your Python
+code:
+```python
+from fps_uvicorn.cli import app
+app(["--host=0.0.0.0","--port=8005","--no-open-browser"])
+```
+
 ### Setup the host
 
 On your host terminal/environment (your development machine, will accept connections from your browser):
